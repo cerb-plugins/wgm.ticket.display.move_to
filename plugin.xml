@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.devblocks.com/schema/plugin.xsd">
+	<id>wgm.ticket.display.move_to</id>
+	<name>[WGM] Display Ticket 'move to' shortcut</name>
+	<description>This adds a 'move to' dropdown shortcut to the Display Ticket page.</description>
+	<author>WebGroup Media, LLC.</author>
+	<revision>1</revision>
+	<link>http://www.cerb5.com/</link>
+	<image>plugin.png</image>
+ 
+	<!-- Plugin Dependencies -->
+	
+	<dependencies>
+		<require plugin_id="cerberusweb.core" version="5.4.0" />
+	</dependencies>
+
+	<!-- Patches -->
+	
+	<patches>
+		<!--
+		<patch version="5.3.0" revision="1" file="patches/5.3.0.php" />
+		-->
+	</patches>
+	
+	<!-- Exported Classes -->
+	
+	<class_loader>
+		<!--
+		<file path="api/dao/example.php">
+			<class name="DAO_Example" />
+			<class name="Model_Example" />
+			<class name="Plugin_Example" />
+			<class name="SearchFields_Example" />
+			<class name="View_Example" />
+		</file>
+		-->
+	</class_loader>
+
+	<!-- Templates -->
+	
+	<!--
+	<templates set="example.template.namespace">
+		<template path="path/to/template.tpl" />
+	</templates>
+	-->	
+
+	<!-- Extensions -->
+ 
+	<extensions>
+
+		<!-- Controller -->
+		
+		<extension point="devblocks.controller">
+			<id>wgm.ticketdisplaymoveto.controller</id>
+			<name>Controller</name>
+			<class>
+				<file>api/App.php</file>
+				<name>Controller_WgmDisplayShortcutAjax</name>
+			</class>
+			<params>
+				<param key="uri" value="wgm.ticketdisplaymoveto" />
+			</params>
+		</extension>
+
+		<!-- Ticket Toolbar Item -->
+
+    	<extension point="cerberusweb.ticket.toolbaritem">
+			<id>wgm.ticketdisplaymoveto.ticket.toolbaritem</id>
+			<name>Move to Shortcut</name>
+			<class>
+				<file>api/App.php</file>
+				<name>TicketToolbarItem_WgmDisplayShortcut</name>
+			</class>
+			<params>
+			</params>
+		</extension>
+		
+    </extensions> 
+</plugin>
