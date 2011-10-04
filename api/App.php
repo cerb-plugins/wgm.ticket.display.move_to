@@ -10,8 +10,8 @@ if (class_exists('Extension_TicketToolbarItem',true)):
 			$buckets = DAO_Bucket::getAll();
 			$tpl->assign('buckets', $buckets);
 			
-			$team_categories = DAO_Bucket::getTeams();
-			$tpl->assign('team_categories', $team_categories);
+			$group_buckets = DAO_Bucket::getGroups();
+			$tpl->assign('group_buckets', $group_buckets);
 			
 			$tpl->assign('ticket', $ticket); /* @var $message Model_Ticket */			
 			$tpl->display('devblocks:wgm.ticket.display.move_to::button.tpl');
@@ -67,14 +67,14 @@ class Controller_WgmDisplayShortcutAjax extends DevblocksControllerExtension {
 		if(empty($ticket_id))
 			exit;
 		
-		// Team/Category
+		// Group/Bucket
 		if(!empty($bucket)) {
-			list($team_id, $bucket_id) = CerberusApplication::translateTeamCategoryCode($bucket);
+			list($group_id, $bucket_id) = CerberusApplication::translateGroupBucketCode($bucket);
 
-			if(!empty($team_id)) {
+			if(!empty($group_id)) {
 				$fields = array(
-			    	DAO_Ticket::TEAM_ID => $team_id,
-			    	DAO_Ticket::CATEGORY_ID => $bucket_id,
+			    	DAO_Ticket::GROUP_ID => $group_id,
+			    	DAO_Ticket::BUCKET_ID => $bucket_id,
 			    );
 			    DAO_Ticket::update($ticket_id, $fields);
 			}
