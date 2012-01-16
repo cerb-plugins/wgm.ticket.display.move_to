@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.devblocks.com/schema/plugin.xsd">
 	<id>wgm.ticket.display.move_to</id>
-	<name>[WGM] Display Ticket 'move to' shortcut</name>
+	<name>Display Ticket 'move to' shortcut</name>
 	<description>This adds a 'move to' dropdown shortcut to the Display Ticket page.</description>
 	<author>WebGroup Media, LLC.</author>
 	<version>1.0.0</version>
