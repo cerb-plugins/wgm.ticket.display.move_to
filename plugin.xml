@@ -68,18 +68,23 @@
 			</params>
 		</extension>
 
-		<!-- Ticket Toolbar Item -->
-
-    	<extension point="cerberusweb.ticket.toolbaritem">
+		<!-- Profile Script -->
+		
+		<extension point="cerberusweb.ui.context.profile.script">
 			<id>wgm.ticketdisplaymoveto.ticket.toolbaritem</id>
-			<name>Move to Shortcut</name>
+			<name>Move To Shortcut</name>
 			<class>
 				<file>api/App.php</file>
 				<name>TicketToolbarItem_WgmDisplayShortcut</name>
 			</class>
 			<params>
+				<param key="contexts">
+					<value>
+						<data key="cerberusweb.contexts.ticket" />
+					</value>
+				</param>				
 			</params>
-		</extension>
-		
+		</extension>		
+
     </extensions> 
 </plugin>

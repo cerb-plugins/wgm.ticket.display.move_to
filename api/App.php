@@ -1,22 +1,27 @@
 <?php
-if (class_exists('Extension_TicketToolbarItem',true)):
-	class TicketToolbarItem_WgmDisplayShortcut extends Extension_TicketToolbarItem {
-		function render(Model_Ticket $ticket) { 
-			$tpl = DevblocksPlatform::getTemplateService();
-			
-			$groups = DAO_Group::getAll();
-			$tpl->assign('groups', $groups);
-			
-			$buckets = DAO_Bucket::getAll();
-			$tpl->assign('buckets', $buckets);
-			
-			$group_buckets = DAO_Bucket::getGroups();
-			$tpl->assign('group_buckets', $group_buckets);
-			
-			$tpl->assign('ticket', $ticket); /* @var $message Model_Ticket */			
-			$tpl->display('devblocks:wgm.ticket.display.move_to::button.tpl');
-		}
-	};
+if (class_exists('Extension_ContextProfileScript')):
+class TicketToolbarItem_WgmDisplayShortcut extends Extension_ContextProfileScript {
+	function renderScript($context, $context_id) {
+		if(0 != strcasecmp($context, CerberusContexts::CONTEXT_TICKET))
+			return;
+		
+		$tpl = DevblocksPlatform::getTemplateService();
+		
+		$groups = DAO_Group::getAll();
+		$tpl->assign('groups', $groups);
+		
+		$buckets = DAO_Bucket::getAll();
+		$tpl->assign('buckets', $buckets);
+		
+		$group_buckets = DAO_Bucket::getGroups();
+		$tpl->assign('group_buckets', $group_buckets);
+		
+		$ticket = DAO_Ticket::get($context_id);
+		
+		$tpl->assign('ticket', $ticket); /* @var $message Model_Ticket */			
+		$tpl->display('devblocks:wgm.ticket.display.move_to::button.js.tpl');
+	}
+}
 endif;
 
 if (class_exists('DevblocksControllerExtension',true)):
