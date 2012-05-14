@@ -1,16 +1,16 @@
 Cerb5 Plugins - wgm.ticket.display.move_to
 ===========================================
-Copyright (C) 2011 WebGroup Media, LLC.  
+Copyright (C) 2012 WebGroup Media, LLC.  
 [http://www.cerberusweb.com/](http://www.cerberusweb.com/)  
 
 What's this?
 ------------
-This plugin adds a 'move to' shortcut to the Display Ticket page.
+This plugin adds a 'move to' shortcut to the Ticket profile page.
 
 Installation
 ------------
-* Change directory to **/cerb5/storage/plugins/**
-* `git clone git://github.com/cerb5-plugins/wgm.ticket.display.move_to.git`
+* Change directory to **/cerb6/storage/plugins/**
+* `git clone git://github.com/cerb6-plugins/wgm.ticket.display.move_to.git`
 * In your helpdesk, enable the plugin from **Setup->Features & Plugins**.
 
 Credits
