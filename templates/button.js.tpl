@@ -1,8 +1,8 @@
 {if !$ticket->is_deleted && $active_worker->hasPriv('core.ticket.actions.move')}
 <select id="wgm_moveto" name="wgm_moveto" style="display:none;">
-	<option value="">-- {$translate->_('common.move_to')|lower} --</option>
+	<option value="">-- {'common.move_to'|devblocks_translate|lower} --</option>
 		{if empty($ticket->bucket_id)}{assign var=t_or_c value="t"}{else}{assign var=t_or_c value="c"}{/if}
-		<optgroup label="{$translate->_('common.inboxes')|capitalize}">
+		<optgroup label="{'common.inboxes'|devblocks_translate|capitalize}">
 		{foreach from=$groups item=group}
 			<option value="t{$group->id}">{$group->name}{if $t_or_c=='t' && $ticket->group_id==$group->id} (*){/if}</option>
 		{/foreach}
