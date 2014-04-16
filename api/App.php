@@ -18,7 +18,7 @@ class TicketToolbarItem_WgmDisplayShortcut extends Extension_ContextProfileScrip
 		
 		$ticket = DAO_Ticket::get($context_id);
 		
-		$tpl->assign('ticket', $ticket); /* @var $message Model_Ticket */			
+		$tpl->assign('ticket', $ticket); /* @var $message Model_Ticket */
 		$tpl->display('devblocks:wgm.ticket.display.move_to::button.js.tpl');
 	}
 }
@@ -40,22 +40,22 @@ class Controller_WgmDisplayShortcutAjax extends DevblocksControllerExtension {
 		$stack = $request->path;
 		array_shift($stack); // example
 		
-	    @$action = array_shift($stack) . 'Action';
+		@$action = array_shift($stack) . 'Action';
 
-	    switch($action) {
-	        case NULL:
-	            // [TODO] Index/page render
-	            break;
-	            
-	        default:
-			    // Default action, call arg as a method suffixed with Action
+		switch($action) {
+			case NULL:
+				// [TODO] Index/page render
+				break;
+				
+			default:
+				// Default action, call arg as a method suffixed with Action
 				if(method_exists($this,$action)) {
 					call_user_func(array(&$this, $action));
 				}
-	            break;
-	    }
-	    
-	    exit;
+				break;
+		}
+		
+		exit;
 	}
 
 	function writeResponse(DevblocksHttpResponse $response) {
@@ -66,23 +66,23 @@ class Controller_WgmDisplayShortcutAjax extends DevblocksControllerExtension {
 		@$ticket_id = DevblocksPlatform::importGPC($_REQUEST['ticket_id'],'integer');
 		@$bucket = DevblocksPlatform::importGPC($_REQUEST['wgm_moveto'],'string','');
 		
-		$groups = DAO_Group::getAll();
-		$buckets = DAO_Bucket::getAll();
-		
-		if(empty($ticket_id))
-			exit;
+		if(empty($ticket_id) || false == ($ticket = DAO_Ticket::get($ticket_id)))
+			return;
 		
 		// Group/Bucket
 		if(!empty($bucket)) {
 			list($group_id, $bucket_id) = CerberusApplication::translateGroupBucketCode($bucket);
 
-			if(!empty($group_id)) {
-				$fields = array(
-			    	DAO_Ticket::GROUP_ID => $group_id,
-			    	DAO_Ticket::BUCKET_ID => $bucket_id,
-			    );
-			    DAO_Ticket::update($ticket_id, $fields);
-			}
+			$fields = array(
+				DAO_Ticket::GROUP_ID => $group_id,
+				DAO_Ticket::BUCKET_ID => $bucket_id,
+			);
+			
+			// Only update fields that changed
+			$fields = Cerb_ORMHelper::uniqueFields($fields, $ticket);
+			
+			if(!empty($fields))
+				DAO_Ticket::update($ticket_id, $fields);
 		}
 		
 		exit;

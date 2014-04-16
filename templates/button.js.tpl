@@ -27,9 +27,9 @@
 	$moveto = $('#wgm_moveto');
 	
 	$moveto.change(function(e) {
-   		genericAjaxGet('', 'c=wgm.ticketdisplaymoveto&a=saveDisplayMoveTo&ticket_id={$ticket->id}&wgm_moveto=' + $(this).val(), function(html) {
-   	   		window.location.reload();
-   		});
+		genericAjaxGet('', 'c=wgm.ticketdisplaymoveto&a=saveDisplayMoveTo&ticket_id={$ticket->id}&wgm_moveto=' + $(this).val(), function(html) {
+				window.location.reload();
+		});
 	});
 	
 	$moveto.appendTo($toolbar).show();
