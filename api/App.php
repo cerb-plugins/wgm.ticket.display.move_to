@@ -64,26 +64,25 @@ class Controller_WgmDisplayShortcutAjax extends DevblocksControllerExtension {
 	
 	function saveDisplayMoveToAction() {
 		@$ticket_id = DevblocksPlatform::importGPC($_REQUEST['ticket_id'],'integer');
-		@$bucket = DevblocksPlatform::importGPC($_REQUEST['wgm_moveto'],'string','');
+		@$bucket_id = DevblocksPlatform::importGPC($_REQUEST['bucket_id'],'integer',0);
 		
 		if(empty($ticket_id) || false == ($ticket = DAO_Ticket::get($ticket_id)))
 			return;
 		
+		if(empty($bucket_id) || false == ($bucket = DAO_Bucket::get($bucket_id)))
+			return;
+		
 		// Group/Bucket
-		if(!empty($bucket)) {
-			list($group_id, $bucket_id) = CerberusApplication::translateGroupBucketCode($bucket);
-
-			$fields = array(
-				DAO_Ticket::GROUP_ID => $group_id,
-				DAO_Ticket::BUCKET_ID => $bucket_id,
-			);
-			
-			// Only update fields that changed
-			$fields = Cerb_ORMHelper::uniqueFields($fields, $ticket);
-			
-			if(!empty($fields))
-				DAO_Ticket::update($ticket_id, $fields);
-		}
+		$fields = array(
+			DAO_Ticket::GROUP_ID => $bucket->group_id,
+			DAO_Ticket::BUCKET_ID => $bucket->id,
+		);
+		
+		// Only update fields that changed
+		$fields = Cerb_ORMHelper::uniqueFields($fields, $ticket);
+		
+		if(!empty($fields))
+			DAO_Ticket::update($ticket_id, $fields);
 		
 		exit;
 	}
