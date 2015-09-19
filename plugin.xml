@@ -4,14 +4,14 @@
 	<name>Display Ticket 'move to' shortcut</name>
 	<description>This adds a 'move to' dropdown shortcut to the Ticket profile page.</description>
 	<author>Webgroup Media, LLC.</author>
-	<version>1.0.15</version>
+	<version>1.0.16</version>
 	<link>http://www.cerbweb.com/book/latest/plugins/wgm.ticket.display.move_to.html</link>
 	<image>plugin.png</image>
  
  	<!-- Requirements -->
 
 	<requires>
-		<app_version min="7.0" max="7.0.99" />
+		<app_version min="7.1" max="7.1.99" />
 	</requires>
  
 	<!-- Plugin Dependencies -->
