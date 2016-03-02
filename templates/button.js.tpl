@@ -1,4 +1,4 @@
-{if !$ticket->is_deleted && $active_worker->hasPriv('core.ticket.actions.move')}
+{if $ticket->status_id != Model_Ticket::STATUS_DELETED && $active_worker->hasPriv('core.ticket.actions.move')}
 <select id="wgm_moveto" name="bucket_id" style="display:none;">
 	<option value="">-- {'common.move_to'|devblocks_translate|lower} --</option>
 		{foreach from=$group_buckets item=buckets key=groupId}
@@ -13,6 +13,7 @@
 </select>
  	
 <script type="text/javascript">
+$(function() {
 	var $subpage = $('BODY > DIV.cerb-subpage');
 	var $toolbar = $subpage.find('FORM.toolbar');
 
@@ -25,5 +26,6 @@
 	});
 	
 	$moveto.appendTo($toolbar).show();
+});
 </script>
 {/if}
