@@ -21,7 +21,7 @@ $(function() {
 	
 	$moveto.change(function(e) {
 		genericAjaxGet('', 'c=wgm.ticketdisplaymoveto&a=saveDisplayMoveTo&ticket_id={$ticket->id}&bucket_id=' + $(this).val(), function(html) {
-				window.location.reload();
+			window.location = window.location;
 		});
 	});
 	
