@@ -5,7 +5,7 @@ class TicketToolbarItem_WgmDisplayShortcut extends Extension_ContextProfileScrip
 		if(0 != strcasecmp($context, CerberusContexts::CONTEXT_TICKET))
 			return;
 		
-		$tpl = DevblocksPlatform::getTemplateService();
+		$tpl = DevblocksPlatform::services()->template();
 		
 		$groups = DAO_Group::getAll();
 		$tpl->assign('groups', $groups);
