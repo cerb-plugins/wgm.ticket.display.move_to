@@ -1,4 +1,4 @@
-{if $ticket->status_id != Model_Ticket::STATUS_DELETED && $active_worker->hasPriv('core.ticket.actions.move')}
+{if $ticket->status_id != Model_Ticket::STATUS_DELETED}
 <select id="wgm_moveto" name="bucket_id" style="display:none;">
 	<option value="">-- {'common.move_to'|devblocks_translate|lower} --</option>
 		{foreach from=$group_buckets item=buckets key=groupId}
